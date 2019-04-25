@@ -1,0 +1,38 @@
+plugins {
+    id "org.jetbrains.kotlin.platform.native" version "1.3.0"
+}
+
+components.main {
+    def productsDir = new File("").absolutePath
+
+    targets = ['ios_arm64', 'ios_x64']
+    outputKinds = [EXECUTABLE]
+
+    allTargets {
+        linkerOpts '-rpath', '@executable_path/Frameworks'
+        linkerOpts "-F${productsDir}"
+    }
+
+    dependencies {
+        cinterop('AFNetworking') {
+            packageName 'com.afnetworking'
+            compilerOpts "-F${productsDir}"
+            linkerOpts "-F${productsDir}"
+            includeDirs {
+                allHeaders "${productsDir}/AFNetworking.framework/Headers"
+            }
+        }
+    }
+}
+
+task copyExecutable() {
+    doLast {
+        def srcFile = tasks['compileDebugIos_x64KotlinNative'].outputFile
+        def targetDir = getProperty("konan.configuration.build.dir")
+        copy {
+            from srcFile.parent
+            into targetDir
+        }
+    }
+}
+

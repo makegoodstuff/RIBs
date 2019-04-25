@@ -7,6 +7,17 @@
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/RIBs.svg)](https://cocoapods.org/pods/ribs)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
 
+## Cross-Platform RIB Tree (Kotlin Native)
+This fork of the Uber RIBs library seeks to unify the Builders, Routers, and Interactors of a RIB tree into a shared framework that both iOS and Android can import. 
+
+Each platform need only implement its own native views/presenters (and as one of the example projects demonstrates, even the iOS UIViewController class can be written in Kotlin Native, bringing the entire RIB tree under the umbrella of a single language). 
+
+### Sample iOS App Written Entire in Kotlin Native
+<p align="center">
+    <img src="/JustinDemo.png" />
+</p>
+
+
 RIBs is the cross-platform architecture framework behind many mobile apps at Uber. The name RIBs is short for Router, Interactor and Builder, which are core components of this architecture. This framework is designed for mobile apps with a large number of engineers and nested states.
 
 The RIBs architecture provides:

@@ -1,0 +1,4 @@
+language = Objective-C
+headers = AFURLSessionManager.h AFURLResponseSerialization.h AFHTTPSessionManager.h
+compilerOpts = -framework AFNetworking
+linkerOpts = -framework AFNetworking
