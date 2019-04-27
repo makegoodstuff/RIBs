@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
     kotlin("multiplatform") version "1.3.31"
@@ -11,29 +12,44 @@ repositories {
 
 val kotlin_version: String by project
 
+val iosFrameworkPrefix: String = "TicTacToeNative"
+
 kotlin {
     jvm("android")
+
+    val ios: KotlinNativeTarget
     if (true) {  // TODO: actually select a target depending on environment
-        iosArm64("ios")
+        ios = iosArm64("ios")
     } else {
-        iosX64("ios")
+        ios = iosX64("ios")
     }
 
+    println("Set up targets: ${targets.names} in ${project.name}")
+
+    ios.binaries {
+        val buildTypes = listOf<NativeBuildType>(DEBUG)
+        framework(iosFrameworkPrefix, buildTypes)
+    }
+
+//    targets {
+//        targetFromPreset(presets.getByName("iosX64"))
+//    }
+
     sourceSets {
+
+        val androidMain by getting {
+        }
+
+
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
             }
-        }
-        val androidMain by getting {
-//            kotlin.srcDir("src/androidMain")
-            dependsOn(commonMain)
+
         }
         val iosMain by getting {
-//            kotlin.srcDir("src/iosMain")
             dependsOn(commonMain)
         }
-        // TODO: add binary {} directive and build the artifacts
 //        val commonTest by getting {
 //            dependencies {
 //                implementation("junit:junit:4.12")
@@ -43,5 +59,24 @@ kotlin {
 //        }
     }
 }
+
+tasks {
+    val build by existing
+    val export by creating
+
+    export.doLast {
+        println("Exporting iOS Framework")
+        val ios = kotlin.targets["ios"] as KotlinNativeTarget?
+        if (ios != null) {
+            val fmwk = ios.binaries.getFramework("TicTacToeNative", NativeBuildType.DEBUG)
+            println(fmwk.name)
+        }
+    }
+
+    build {
+        dependsOn(export)
+    }
+}
+
 
 // TODO: Add gradle task function which can be called from xcode (./gradelw TASK_NAME -Pparams)
