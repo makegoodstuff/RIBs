@@ -4,4 +4,8 @@
 # Ignore Gradle build output directory
 build
 
+gradlew
+**/gradlew
+gradlew.bat
+**/gradlew.bat
 **/wrapper/*.jar

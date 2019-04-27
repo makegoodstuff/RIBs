@@ -16,7 +16,7 @@
 
 import RIBs
 
-protocol RootInteractable: Interactable, LoggedOutListener, LoggedInListener {
+protocol RootInteractable: Interactable, LoggedInListener {
     var router: RootRouting? { get set }
     var listener: RootListener? { get set }
 }
@@ -30,9 +30,9 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
 
     init(interactor: RootInteractable,
          viewController: RootViewControllable,
-         loggedOutBuilder: LoggedOutBuildable,
+//         loggedOutBuilder: LoggedOutBuildable,
          loggedInBuilder: LoggedInBuildable) {
-        self.loggedOutBuilder = loggedOutBuilder
+//        self.loggedOutBuilder = loggedOutBuilder
         self.loggedInBuilder = loggedInBuilder
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
@@ -41,7 +41,7 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     override func didLoad() {
         super.didLoad()
 
-        routeToLoggedOut()
+//        routeToLoggedOut()
     }
 
     func routeToLoggedIn(withPlayer1Name player1Name: String, player2Name: String) {
@@ -58,15 +58,15 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
 
     // MARK: - Private
 
-    private let loggedOutBuilder: LoggedOutBuildable
+//    private let loggedOutBuilder: LoggedOutBuildable
     private let loggedInBuilder: LoggedInBuildable
 
     private var loggedOut: ViewableRouting?
 
-    private func routeToLoggedOut() {
-        let loggedOut = loggedOutBuilder.build(withListener: interactor)
-        self.loggedOut = loggedOut
-        attachChild(loggedOut)
-        viewController.present(viewController: loggedOut.viewControllable)
-    }
+//    private func routeToLoggedOut() {
+//        let loggedOut = loggedOutBuilder.build(withListener: interactor)
+//        self.loggedOut = loggedOut
+//        attachChild(loggedOut)
+//        viewController.present(viewController: loggedOut.viewControllable)
+//    }
 }

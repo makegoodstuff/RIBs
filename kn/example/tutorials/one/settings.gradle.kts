@@ -8,7 +8,7 @@
  */
 
 
-include("native:LoggedOut")
+include("native:LoggedOut", "ios", "android")
 
 rootProject.name = "TicTacToe"
 

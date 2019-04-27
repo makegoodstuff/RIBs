@@ -12,7 +12,7 @@ repositories {
 
 val kotlin_version: String by project
 
-val iosFrameworkPrefix: String = "TicTacToeNative"
+val iosFrameworkPrefix: String = "LoggedOut"
 
 kotlin {
     jvm("android")
@@ -36,17 +36,17 @@ kotlin {
 //    }
 
     sourceSets {
-
-        val androidMain by getting {
-        }
-
-
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
             }
 
         }
+
+        val androidMain by getting {
+            dependsOn(commonMain)
+        }
+
         val iosMain by getting {
             dependsOn(commonMain)
         }
@@ -68,7 +68,7 @@ tasks {
         println("Exporting iOS Framework")
         val ios = kotlin.targets["ios"] as KotlinNativeTarget?
         if (ios != null) {
-            val fmwk = ios.binaries.getFramework("TicTacToeNative", NativeBuildType.DEBUG)
+            val fmwk = ios.binaries.getFramework(iosFrameworkPrefix, NativeBuildType.DEBUG)
             println(fmwk.name)
         }
     }
@@ -77,6 +77,3 @@ tasks {
         dependsOn(export)
     }
 }
-
-
-// TODO: Add gradle task function which can be called from xcode (./gradelw TASK_NAME -Pparams)

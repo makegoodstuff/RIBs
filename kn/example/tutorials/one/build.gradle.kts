@@ -20,8 +20,11 @@ allprojects {
 
     repositories {
         google()
+        maven { setUrl("https://maven.google.com") }
+
         jcenter()
         mavenCentral()
+
         maven { setUrl("https://dl.bintray.com/kotlin/kotlin-dev") }
         maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
     }

@@ -15,6 +15,7 @@
 //
 
 import RIBs
+//import LoggedOut
 
 protocol RootDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
@@ -50,11 +51,11 @@ final class RootBuilder: Builder<RootDependency>, RootBuildable {
                                       rootViewController: viewController)
         let interactor = RootInteractor(presenter: viewController)
 
-        let loggedOutBuilder = LoggedOutBuilder(dependency: component)
+//        let loggedOutBuilder = LoggedOutBuilder(dependency: component)
         let loggedInBuilder = LoggedInBuilder(dependency: component)
         return RootRouter(interactor: interactor,
                           viewController: viewController,
-                          loggedOutBuilder: loggedOutBuilder,
+//                          loggedOutBuilder: loggedOutBuilder,
                           loggedInBuilder: loggedInBuilder)
     }
 }
