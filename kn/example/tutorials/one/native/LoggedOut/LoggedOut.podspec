@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "http://github.com/makegoodstuff/RIBs.git", :tag => "0.0.0" }
   s.script_phase = {
     :name => '[Gradle] Generate Kotlin Native Framework for iOS',
-    :script => '$SRCROOT/../../gradlew -p "$SRCROOT/.." ":native:LoggedOut:export"',
+    :script => '$SRCROOT/../../gradlew -p "$SRCROOT/.." ":native:LoggedOut:export" -PtargetDirectory="$PODS_BUILD_DIR"',
     :execution_position => :before_compile
   }
 

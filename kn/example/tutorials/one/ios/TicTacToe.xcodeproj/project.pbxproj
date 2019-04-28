@@ -274,8 +274,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TicTacToe/Pods-TicTacToe-frameworks.sh",
-				"${PODS_ROOT}/../../native/LoggedOut/build/bin/ios/LoggedOutDebugFramework/LoggedOut.framework",
-				"${PODS_ROOT}/../../native/LoggedOut/build/bin/ios/LoggedOutDebugFramework/LoggedOut.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/LoggedOut/LoggedOut.framework",
 				"${BUILT_PRODUCTS_DIR}/RIBs/RIBs.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -285,7 +283,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LoggedOut.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/LoggedOut.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RIBs.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -404,7 +401,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$SRCROOT/../native/**",
-					$SRCROOT/../native/LoggedOut/build/bin/ios/LoggedOutDebugFramework,
+					"$SRCROOT/../native/LoggedOut/build/bin/ios/LoggedOutDebugFramework",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -469,7 +466,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$SRCROOT/../native/**",
-					$SRCROOT/../native/LoggedOut/build/bin/ios/LoggedOutDebugFramework,
+					"$SRCROOT/../native/LoggedOut/build/bin/ios/LoggedOutDebugFramework",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;

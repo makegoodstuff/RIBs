@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
@@ -62,18 +63,32 @@ kotlin {
 
 tasks {
     val build by existing
-    val export by creating
-
-    export.doLast {
+    val export by registering(Copy::class) {
         println("Exporting iOS Framework")
         val ios = kotlin.targets["ios"] as KotlinNativeTarget?
         if (ios != null) {
-            val fmwk = ios.binaries.getFramework(iosFrameworkPrefix, NativeBuildType.DEBUG)
-            println(fmwk.name)
-        }
-    }
+            val fmwk: Framework = ios.binaries.getFramework(iosFrameworkPrefix, NativeBuildType.DEBUG)
 
-    build {
-        dependsOn(export)
+            from(fmwk.outputFile)
+            val targetDirectory: String? by rootProject.extra
+
+            if (targetDirectory != null) {
+                println("Copying iOS Framework to $targetDirectory")
+                into(targetDirectory as String)
+            } else {
+                println("iOS Framework exported to ${fmwk.outputFile}")
+                into(fmwk.outputDirectory)
+            }
+        }
+
+        dependsOn(build)
     }
 }
+
+var fmwkLocation: File? by project.extra
+
+//    val copy by  {
+//        if (fmwkLocation != null) {
+//
+//        }
+//    }
