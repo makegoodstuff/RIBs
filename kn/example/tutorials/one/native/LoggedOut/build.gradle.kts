@@ -18,7 +18,7 @@ kotlin {
     jvm("android")
 
     val ios: KotlinNativeTarget
-    if (true) {  // TODO: actually select a target depending on environment
+    if (false) {  // TODO: actually select a target depending on environment
         ios = iosArm64("ios")
     } else {
         ios = iosX64("ios")
